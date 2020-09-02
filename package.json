@@ -1,0 +1,14 @@
+{
+	"name": "backfiler",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"start": "node ."
+	},
+	"author": "neelr",
+	"license": "MIT",
+	"dependencies": {
+		"docx2html": "^1.1.0"
+	}
+}

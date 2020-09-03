@@ -1,4 +1,6 @@
+require("dotenv").config()
 const pandoc = require("node-pandoc")
+const utf8 = require('utf8');
 const cheerio = require("cheerio")
 const { v4: uuidv4 } = require('uuid');
 const fs = require("fs")
@@ -6,8 +8,8 @@ var mysql = require('nodejs-mysql').default;
 const db = mysql.getInstance({
     host: 'localhost',
     user: 'root',
-    password: '*****',
-    database: 'BackFiler'
+    password: process.env.PASS,
+    database: process.env.SQL_DB
 });
 
 
@@ -43,15 +45,20 @@ let handleFile = async dir => {
             index: i
         };
         if (card.tag && card.cite && card.card) {
-            await db.exec('INSERT INTO cards set ?', {
-                id: uuidv4(),
-                tag: card.tag,
-                cite: card.cite,
-                card: card.card,
-                text: card.text,
-                file: dir
-            })
-            console.log(`carded: ${card.tag}`)
+            try {
+                await db.exec('INSERT INTO cards set ?', {
+                    id: uuidv4(),
+                    tag: utf8.encode(card.tag),
+                    cite: utf8.encode(card.cite),
+                    card: utf8.encode(card.card),
+                    text: utf8.encode(card.text),
+                    file: utf8.encode(dir)
+                })
+
+                console.log(`carded: ${card.tag}`)
+            } catch {
+                console.log("QUERY ERROR, MOVING ON!")
+            }
         }
     }
     return

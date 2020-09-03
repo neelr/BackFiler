@@ -78,7 +78,7 @@ export default function Home() {
 			</Card>
 			<Modal
 				width="90vw"
-				open={modalCardIndex > 0}
+				open={modalCardIndex >= 0}
 				onClose={() => setModal(-1)}
 			>
 				<div
@@ -87,7 +87,9 @@ export default function Home() {
 					}}
 					dangerouslySetInnerHTML={{
 						__html:
-							modalCardIndex > 0 ? data[modalCardIndex].card : "",
+							modalCardIndex >= 0
+								? data[modalCardIndex].card
+								: "",
 					}}
 				/>
 				<Modal.Action passive onClick={() => setModal(-1)}>

@@ -1,25 +1,27 @@
 {
-  "name": "backfiler-web",
-  "version": "1.0.0",
-  "description": "Website for backfiler",
-  "main": "index.js",
-  "scripts": {
-    "test": "next"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/neelr/BackFiler.git"
-  },
-  "author": "neelr",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/neelr/BackFiler/issues"
-  },
-  "homepage": "https://github.com/neelr/BackFiler#readme",
-  "dependencies": {
-    "@geist-ui/react": "^2.0.2",
-    "next": "^9.5.3",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
-  }
+	"name": "backfiler-web",
+	"version": "1.0.0",
+	"description": "Website for backfiler",
+	"main": "index.js",
+	"scripts": {
+		"test": "next",
+		"build": "next build",
+		"export": "next export"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/neelr/BackFiler.git"
+	},
+	"author": "neelr",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/neelr/BackFiler/issues"
+	},
+	"homepage": "https://github.com/neelr/BackFiler#readme",
+	"dependencies": {
+		"@geist-ui/react": "^2.0.2",
+		"next": "^9.5.3",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	}
 }

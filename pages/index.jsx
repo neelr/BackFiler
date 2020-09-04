@@ -1,11 +1,43 @@
 import Head from "next/head";
-import { Page, Text, Card, Note, Code, Spacer } from "@geist-ui/react";
+import { Page, Text, Card, Code, Spacer } from "@geist-ui/react";
 
 export default function Home() {
 	return (
 		<Page>
 			<Head>
 				<title>BackFiler</title>
+				<meta name="title" content="BackFiler" />
+				<meta
+					name="description"
+					content="The best way to index your debate backfiles for cards!"
+				/>
+
+				<meta property="og:type" content="website" />
+				<meta property="og:url" content="https://backfiler.now.sh/" />
+				<meta property="og:title" content="BackFiler" />
+				<meta
+					property="og:description"
+					content="The best way to index your debate backfiles for cards!"
+				/>
+				<meta
+					property="og:image"
+					content="https://doggo.ninja/QH45hq.png"
+				/>
+
+				<meta property="twitter:card" content="summary_large_image" />
+				<meta
+					property="twitter:url"
+					content="https://backfiler.now.sh/"
+				/>
+				<meta property="twitter:title" content="BackFiler" />
+				<meta
+					property="twitter:description"
+					content="The best way to index your debate backfiles for cards!"
+				/>
+				<meta
+					property="twitter:image"
+					content="https://doggo.ninja/QH45hq.png"
+				/>
 			</Head>
 			<Text h1>
 				<a href="https://github.com/neelr/BackFiler">BackFiler</a>

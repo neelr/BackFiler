@@ -1,35 +1,25 @@
 {
-	"name": "backfiler",
-	"version": "1.0.0",
-	"description": "",
-	"main": "app/background.js",
-	"scripts": {
-		"dev": "nextron",
-		"build": "nextron build",
-		"postinstall": "electron-builder install-app-deps",
-		"scrape": "node scraper.js"
-	},
-	"author": "neelr",
-	"license": "MIT",
-	"dependencies": {
-		"electron-serve": "^1.0.0",
-		"electron-store": "^5.2.0",
-		"fix-path": "^3.0.0",
-		"sqlite3": "^5.0.0"
-	},
-	"devDependencies": {
-		"@geist-ui/react": "^2.0.2",
-		"node-pandoc": "^0.3.0",
-		"uuid": "^8.3.0",
-		"cheerio": "^1.0.0-rc.3",
-		"@babel/core": "^7.10.2",
-		"babel-loader": "^8.1.0",
-		"electron": "^9.0.3",
-		"electron-builder": "^22.7.0",
-		"next": "^9.4.4",
-		"nextron": "^5.15.0",
-		"react": "^16.13.1",
-		"react-dom": "^16.13.1",
-		"webpack": "^4.43.0"
-	}
+  "name": "backfiler-web",
+  "version": "1.0.0",
+  "description": "Website for backfiler",
+  "main": "index.js",
+  "scripts": {
+    "test": "next"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neelr/BackFiler.git"
+  },
+  "author": "neelr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neelr/BackFiler/issues"
+  },
+  "homepage": "https://github.com/neelr/BackFiler#readme",
+  "dependencies": {
+    "@geist-ui/react": "^2.0.2",
+    "next": "^9.5.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
 }

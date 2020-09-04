@@ -1,23 +1,22 @@
-require("dotenv").config()
-const pandoc = require("node-pandoc")
-const utf8 = require('utf8');
-const cheerio = require("cheerio")
-const { v4: uuidv4 } = require('uuid');
-const fs = require("fs")
-var mysql = require('nodejs-mysql').default;
-const db = mysql.getInstance({
-    host: 'localhost',
-    user: 'root',
-    password: process.env.PASS,
-    database: process.env.SQL_DB
-});
+import { app } from 'electron';
+import pandoc from "node-pandoc"
+import fix from "fix-path"
+import cheerio from "cheerio"
+import { v4 } from "uuid"
+import fs from "fs"
+import sqlite3 from "sqlite3"
+import path from "path"
 
+fix()
+
+var db = new sqlite3.Database(path.join(app.getPath("userData"), "debateCards.db"));
 
 let getHTML = dir => {
     return new Promise((res, rej) => {
         const args = '-f docx -t html5';
         pandoc(dir, args, (e, r) => {
             if (e) {
+                console.log(e)
                 rej(e)
                 return
             }
@@ -26,9 +25,13 @@ let getHTML = dir => {
     })
 }
 
-let handleFile = async dir => {
-    let html = await getHTML(dir)
-    cards = [];
+let handleFile = async (dir, cb) => {
+    var html = ""
+    try {
+        html = await getHTML(dir)
+    } catch{
+        return
+    }
     var $ = cheerio.load(html);
     let h4 = $('h4')
     for (let i = 0; i < h4.length; i++) {
@@ -46,16 +49,15 @@ let handleFile = async dir => {
         };
         if (card.tag && card.cite && card.card) {
             try {
-                await db.exec('INSERT INTO cards set ?', {
-                    id: uuidv4(),
-                    tag: utf8.encode(card.tag),
-                    cite: utf8.encode(card.cite),
-                    card: utf8.encode(card.card),
-                    text: utf8.encode(card.text),
-                    file: utf8.encode(dir)
-                })
-
-                console.log(`carded: ${card.tag}`)
+                db.run('INSERT INTO cards VALUES(?,?,?,?,?,?)', [
+                    v4(),
+                    card.tag,
+                    card.cite,
+                    card.card,
+                    card.text,
+                    dir
+                ])
+                cb(card.tag, dir)
             } catch {
                 console.log("QUERY ERROR, MOVING ON!")
             }
@@ -79,16 +81,15 @@ let crawl = dir => {
     });
     return paths;
 }
-(async () => {
-    let files = crawl("/Users/neelredkar/Dropbox")
 
-    for (let i = 0; i < files.length; i++) {
+export default async (dir, cb) => {
+    let paths = crawl(dir)
+
+    for (let i = 0; i < paths.length; i++) {
         try {
-            await handleFile(files[i])
+            await handleFile(paths[i], cb)
         } catch {
-            console.log("File error, moving on!")
+            console.log("err")
         }
     }
-    console.log("DONE: Indexed all files!")
-    process.exit(0)
-})()
+}

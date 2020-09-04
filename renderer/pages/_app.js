@@ -12,7 +12,8 @@ export default ({ Component, ...props }) => {
             <div style={{
                 display: "flex",
                 width: "100vw",
-                padding: "15px"
+                padding: "15px",
+                position: "absolute"
             }}>
                 <Button style={{
                     marginLeft: "auto",

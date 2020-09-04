@@ -11,6 +11,7 @@ import {
 	Button,
 	Table,
 	Modal,
+	Link,
 } from "@geist-ui/react";
 
 const ipcRenderer = electron.ipcRenderer || false;
@@ -36,11 +37,10 @@ export default function Home() {
 		<Page>
 			<Head>
 				<title>BackFiler</title>
+				<meta charSet="UTF-8" />
 			</Head>
 			<Text h1>Welcome to BackFiler!</Text>
-			<Note type="warning">
-				Please do not fucking SQL Inject you dumbass
-			</Note>
+			<Note type="success">Type your FTS5 query in!</Note>
 			<Spacer y={1.5} />
 			<Card>
 				<div
@@ -61,6 +61,14 @@ export default function Home() {
 					>
 						Search
 					</Button>
+					<Link
+						href="cards.html"
+						style={{
+							marginLeft: "auto",
+						}}
+					>
+						<Button type="success">Add Cards</Button>
+					</Link>
 				</div>
 				<Table
 					data={data}
@@ -92,6 +100,18 @@ export default function Home() {
 								: "",
 					}}
 				/>
+				<Modal.Action
+					passive
+					onClick={() => {
+						ipcRenderer.send("delete", data[modalCardIndex].id);
+						setModal(-1);
+					}}
+					style={{
+						color: "red",
+					}}
+				>
+					Delete
+				</Modal.Action>
 				<Modal.Action passive onClick={() => setModal(-1)}>
 					Done
 				</Modal.Action>

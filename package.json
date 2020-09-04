@@ -4,7 +4,7 @@
 	"description": "Website for backfiler",
 	"main": "index.js",
 	"scripts": {
-		"test": "next",
+		"dev": "next",
 		"build": "next build",
 		"export": "next export"
 	},

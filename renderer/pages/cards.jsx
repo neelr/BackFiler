@@ -12,7 +12,6 @@ import {
 	Modal,
 	Link,
 } from "@geist-ui/react";
-import path from "path";
 
 const ipcRenderer = electron.ipcRenderer || false;
 
@@ -85,8 +84,8 @@ export default function Home() {
 								let abspath = inputRef.current.files[0].path;
 								let actual_abs =
 									abspath.split(
-										relative.split(path.sep)[0]
-									)[0] + relative.split(path.sep)[0];
+										relative.split("/")[0]
+									)[0] + relative.split("/")[0];
 								setData(`Scraping "${actual_abs}"`);
 								consoleText = `Scraping "${actual_abs}"`;
 								usingConsole = false;
